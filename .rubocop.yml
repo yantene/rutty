@@ -1,0 +1,30 @@
+inherit_mode:
+  merge:
+    - Exclude
+
+require:
+  - rubocop-rspec
+  - rubocop-rubycw
+  - rubocop-performance
+  - standard/cop/semantic_blocks
+
+inherit_gem:
+  standard: config/base.yml
+
+AllCops:
+  TargetRubyVersion: 3.0 # standardrb don't check .ruby-version
+  Exclude:
+    - vendor/**/*
+  NewCops: enable
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: space
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
