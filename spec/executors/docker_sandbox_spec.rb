@@ -1,3 +1,4 @@
+require "rails_helper"
 require "tmpdir"
 
 RSpec.describe DockerSandbox do

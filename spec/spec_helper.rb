@@ -37,7 +37,4 @@ RSpec.configure do |config|
 
   # seed global randomization
   Kernel.srand config.seed
-
-  # require all application code
-  Dir.glob(File.join(__dir__, "../app/**/*.rb")).sort.each(&method(:require))
 end
