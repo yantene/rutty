@@ -3,6 +3,7 @@ inherit_mode:
     - Exclude
 
 require:
+  - rubocop-rails
   - rubocop-rspec
   - rubocop-rubycw
   - rubocop-performance
