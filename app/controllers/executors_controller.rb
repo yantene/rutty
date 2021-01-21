@@ -1,25 +1,36 @@
 class ExecutorsController < ApplicationController
   def index
-    render json: [
+    render json: EXECUTORS.map { |executor|
       {
-        language: "ruby",
-        version: "3.0.0",
-      },
-    ]
+        language: executor::LANGUAGE,
+        version: executor::VERSION,
+      }
+    }
   end
 
   def show
+    permitted_params = params.permit(:language)
+    executor = find_executor_by_language(permitted_params[:language])
+
     render json: {
-      language: "ruby",
-      version: "3.0.0",
+      language: executor::LANGUAGE,
+      version: executor::VERSION,
     }
   end
 
   def execute
+    permitted_params = params.permit(:language, :code)
+    language = permitted_params[:language]
+    code = permitted_params[:code]
+
+    executor = find_executor_by_language(language).new
+
+    stdout, stderr, rc = executor.execute!(code)
+
     render json: {
-      stdout: "piyopiyo",
-      stderr: "hogehoge",
-      rc: 0,
+      stdout: stdout,
+      stderr: stderr,
+      rc: rc,
     }
   end
 
