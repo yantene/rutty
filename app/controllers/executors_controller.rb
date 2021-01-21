@@ -22,4 +22,18 @@ class ExecutorsController < ApplicationController
       rc: 0,
     }
   end
+
+  EXECUTORS = [
+    RubyExecutor,
+  ]
+
+  # language を処理できる Executor を取得する
+  # @param [String] language 言語名
+  # @return [Class] language を処理できる Executor の class
+  # @return [nil] language を処理できる Executor が無いときには nil を返す
+  def find_executor_by_language(language)
+    EXECUTORS.find { |executor|
+      executor::LANGUAGE == language
+    }
+  end
 end
