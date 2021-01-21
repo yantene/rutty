@@ -52,4 +52,12 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Committee
+  config.include Committee::Rails::Test::Methods, type: :request
+  config.add_setting :committee_options
+  config.committee_options = {
+    schema_path: Rails.root.join("schema", "schema.yaml").to_s,
+    parse_response_by_content_type: false,
+  }
 end
