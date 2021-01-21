@@ -1,6 +1,9 @@
 class RubyExecutor
+  LANGUAGE = "ruby"
+  VERSION = "3.0.0"
+
   def initialize(timeout_sec: 3, kill_sec: 5)
-    @executor = DockerSandbox.new(docker_image: "ruby:3.0-slim")
+    @executor = DockerSandbox.new(docker_image: "#{LANGUAGE}:#{VERSION}-slim-buster")
     @timeout_sec = timeout_sec
     @kill_sec = kill_sec
   end
