@@ -16,3 +16,7 @@ group :development, :test do
   # RSpec
   gem "rspec-rails", require: false
 end
+
+group :test do
+  gem "committee-rails"
+end
