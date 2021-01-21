@@ -1,0 +1,113 @@
+openapi: "3.0.3"
+info:
+  title: Rutty
+  version: "0.1"
+servers:
+  - url: http://127.0.0.1:3000
+paths:
+  /executors:
+    get:
+      summary: |
+        サポートする executor 一覧
+      description: |
+        サポートする executor の一覧を JSON で返す。
+      responses:
+        "200":
+          description: executor の一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/executor_information"
+  /executors/{language}:
+    get:
+      summary: |
+        {language} executor 詳細
+      description: |
+        {language} executor の詳細を JSON で返す。
+      parameters:
+        - $ref: "#/components/parameters/language"
+      responses:
+        "200":
+          description: executor の詳細
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/executor_information"
+        "404":
+          description: executor が存在しない
+    post:
+      summary: |
+        {language} executor でコードを実行
+      description: |
+        {language} executor で指定したコードを実行し、
+        実行結果 (標準出力、標準エラー出力、Return Code) を返す。
+      parameters:
+        - $ref: "#/components/parameters/language"
+      requestBody:
+        description: source code to execute
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  example: |
+                    puts "Hello, world!"
+                    warn "Good-by, world!"
+      responses:
+        "200":
+          description: 実行結果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/executor_result"
+        "400":
+          description: リクエストが正しくない
+        "404":
+          description: executor が存在しない
+        "500":
+          description: 何らかのサーバーエラーが発生した場合
+components:
+  schemas:
+    language:
+      type: string
+      example: ruby
+    executor_information:
+      type: object
+      required:
+        - language
+        - version
+      additionalProperties: false
+      properties:
+        language:
+          $ref: "#/components/schemas/language"
+        version:
+          type: string
+          example: 3.0.0
+    executor_result:
+      type: object
+      additionalProperties: false
+      properties:
+        stdout:
+          type: string
+          example: |
+            Hello, world!
+        stderr:
+          type: string
+          example: |
+            Good-by, world!
+        rc:
+          type: integer
+          example: 0
+  parameters:
+    language:
+      name: language
+      in: path
+      description: executor language
+      required: true
+      schema:
+        $ref: "#/components/schemas/language"
