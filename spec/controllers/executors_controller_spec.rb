@@ -1,17 +1,17 @@
 require "rails_helper"
 
 RSpec.describe ExecutorsController do
-  describe "#find_executor_by_language" do
-    it "Executor が存在する language を引数に与えると、その Executor が返ること" do
-      executor = controller.find_executor_by_language(RubyExecutor::LANGUAGE)
+  describe "#find_executor_environment_by_language" do
+    it "ExecutorEnvironment が存在する language を引数に与えると、その ExecutorEnvironment が返ること" do
+      env = controller.find_executor_environment_by_language(ExecutorEnvironment::Ruby::LANGUAGE)
 
-      expect(executor).to eq(RubyExecutor)
+      expect(env).to eq(ExecutorEnvironment::Ruby)
     end
 
-    it "Executor が存在しない language を引数に与えると、nil が返ること" do
-      executor = controller.find_executor_by_language("fictitious_lang")
+    it "ExecutorEnvironment が存在しない language を引数に与えると、nil が返ること" do
+      env = controller.find_executor_environment_by_language("fictitious_lang")
 
-      expect(executor).to be_nil
+      expect(env).to be_nil
     end
   end
 end

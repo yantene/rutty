@@ -4,6 +4,7 @@ ruby "3.0.0"
 
 gem "rails", "~> 6.1.1"
 gem "puma"
+gem "docker-api"
 
 group :development, :test do
   # Rubocop
