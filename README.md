@@ -1,1 +1,1 @@
-# rutty
+![Rutty](./artwork/logo.png)
