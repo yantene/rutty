@@ -1,20 +1,20 @@
 class ExecutorsController < ApplicationController
   def index
-    render json: EXECUTORS.map { |executor|
+    render json: EXECUTOR_ENVIRONMENTS.map { |env|
       {
-        language: executor::LANGUAGE,
-        version: executor::VERSION,
+        language: env::LANGUAGE,
+        version: env::VERSION,
       }
     }
   end
 
   def show
     permitted_params = params.permit(:language)
-    executor = find_executor_by_language(permitted_params[:language])
+    env = find_executor_environment_by_language(permitted_params[:language])
 
     render json: {
-      language: executor::LANGUAGE,
-      version: executor::VERSION,
+      language: env::LANGUAGE,
+      version: env::VERSION,
     }
   end
 
@@ -23,9 +23,11 @@ class ExecutorsController < ApplicationController
     language = permitted_params[:language]
     code = permitted_params[:code]
 
-    executor = find_executor_by_language(language).new
+    env = find_executor_environment_by_language(language)
 
-    stdout, stderr, rc = executor.execute!(code)
+    executor = Executor.new(env)
+
+    stdout, stderr, rc = executor.run!(code)
 
     render json: {
       stdout: stdout,
@@ -34,17 +36,18 @@ class ExecutorsController < ApplicationController
     }
   end
 
-  EXECUTORS = [
-    RubyExecutor,
+  EXECUTOR_ENVIRONMENTS = [
+    ExecutorEnvironment::Bash,
+    ExecutorEnvironment::Ruby,
   ]
 
   # language を処理できる Executor を取得する
   # @param [String] language 言語名
   # @return [Class] language を処理できる Executor の class
   # @return [nil] language を処理できる Executor が無いときには nil を返す
-  def find_executor_by_language(language)
-    EXECUTORS.find { |executor|
-      executor::LANGUAGE == language
+  def find_executor_environment_by_language(language)
+    EXECUTOR_ENVIRONMENTS.find { |env|
+      env::LANGUAGE == language
     }
   end
 end
