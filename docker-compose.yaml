@@ -1,0 +1,18 @@
+version: "3.3"
+services:
+  app:
+    image: yantene/rutty
+    build: .
+    ports:
+      - target: 3000
+        published: 3000
+        protocol: tcp
+    depends_on:
+      - dind
+    environment:
+      DOCKER_HOST: "tcp://dind:2375"
+  dind:
+    image: docker:20.10.2-dind
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+    privileged: true
