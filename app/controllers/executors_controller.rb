@@ -38,6 +38,7 @@ class ExecutorsController < ApplicationController
 
   EXECUTOR_ENVIRONMENTS = [
     ExecutorEnvironment::Bash,
+    ExecutorEnvironment::Php,
     ExecutorEnvironment::Ruby,
   ]
 
