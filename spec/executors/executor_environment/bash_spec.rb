@@ -54,7 +54,7 @@ RSpec.describe ExecutorEnvironment::Bash do
 
     context "ネットワークを利用しようとしたとき" do
       it "`ping -c1 -W3 8.8.8.8` を実行すると、正常終了しないこと" do
-        _stdout, stderr, rc = bash_executor.run!(%w[ping -c1 -W3 8.8.8.8])
+        _stdout, _stderr, rc = bash_executor.run!(%w[ping -c1 -W3 8.8.8.8])
 
         expect(rc).to_not eq 0
       end
