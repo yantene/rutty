@@ -32,4 +32,4 @@ $ curl http://localhost:3000/executors/bash \
 
 ## 対応チャットツール
 
-- [Slack](/k1hiiragi/rutty-slack)
+- [Slack](https://github.com/k1hiiragi/rutty-slack)
