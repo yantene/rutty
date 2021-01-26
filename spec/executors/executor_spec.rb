@@ -21,8 +21,6 @@ RSpec.describe Executor do
       _stdout, stderr, _rc = executor.send(:start_container!, container)
       expect(stderr).to eq "good-by\n"
 
-      p _stdout, stderr, _rc
-
       container.delete
     end
 
