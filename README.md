@@ -26,6 +26,7 @@ $ curl http://localhost:3000/executors/bash \
 現在、以下の言語に対応しています。
 
 - Bash
+- COBOL
 - PHP
 - Ruby
 
