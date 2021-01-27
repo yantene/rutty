@@ -28,6 +28,19 @@ RSpec.describe ExecutorEnvironment::Bash do
           expect(rc).to eq 0
         end
       end
+
+      it '"日本語テキスト" を標準出力、標準エラー出力するコードを与えると、stdout と stderr が "日本語テキスト\n"、rc が 0 で返ること' do
+        stdout, stderr, rc = bash_executor.run!(<<~BASH)
+          echo "日本語テキスト"
+          echo "日本語テキスト" >&2
+        BASH
+
+        aggregate_failures do
+          expect(stdout).to eq "日本語テキスト\n"
+          expect(stderr).to eq "日本語テキスト\n"
+          expect(rc).to eq 0
+        end
+      end
     end
 
     context "エラーが発生するコードを与えたとき" do
