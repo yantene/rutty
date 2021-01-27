@@ -62,8 +62,8 @@ class Executor
       container.kill
     end
 
-    stdout = container.streaming_logs(stdout: true)
-    stderr = container.streaming_logs(stderr: true)
+    stdout = container.streaming_logs(stdout: true).force_encoding("UTF-8")
+    stderr = container.streaming_logs(stderr: true).force_encoding("UTF-8")
     rc = container.wait["StatusCode"]
 
     [
