@@ -27,6 +27,7 @@ $ curl http://localhost:3000/executors/bash \
 
 - Bash
 - COBOL
+- JavaScript
 - PHP
 - Ruby
 
