@@ -1,6 +1,6 @@
 version: "3.3"
 services:
-  app:
+  rutty:
     image: yantene/rutty
     build: .
     ports:
@@ -11,6 +11,7 @@ services:
       - dind
     environment:
       DOCKER_HOST: "tcp://dind:2375"
+      AUTHORIZED_HOSTNAME: "rutty"
   dind:
     image: docker:20.10.2-dind
     environment:
