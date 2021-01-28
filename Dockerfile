@@ -10,6 +10,9 @@ RUN mkdir -p /opt/www/rutty
 
 WORKDIR /opt/www/rutty
 
+ARG RAILS_ENV
+ENV RAILS_ENV ${RAILS_ENV:-production}
+
 COPY Gemfile* ./
 
 RUN apk update && apk upgrade
@@ -18,6 +21,7 @@ RUN apk add --no-cache ${RUN_PKGS}
 
 RUN \
   apk add --virtual build-dependencies --no-cache ${DEV_PKGS} && \
+  bundle config set --local with ${RAILS_ENV} &&\
   bundle install && \
   apk del build-dependencies
 
