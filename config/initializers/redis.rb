@@ -1,4 +1,3 @@
 Redis.current = Redis.new(
-  host: ENV.fetch("REDIS_HOST", "localhost"),
-  port: ENV.fetch("REDIS_PORT", 6379),
+  url: ENV.fetch("REDIS_URL", "redis://redis:6379"),
 )
