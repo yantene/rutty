@@ -38,7 +38,7 @@ class Executor
   def run!(script)
     result = nil
 
-    create_container!(@environment::IMAGE.id) do |container|
+    create_container!(@environment.image_id) do |container|
       container.store_file(@environment::SCRIPT_PATH, script)
 
       result = start_container!(container)

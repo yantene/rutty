@@ -1,21 +1,37 @@
-version: "3.3"
+version: "3.9"
 services:
   rutty:
+    restart: always
     image: yantene/rutty
-    build: .
+    build:
+      context: .
+      dockerfile: ./docker/development/Dockerfile
     ports:
       - target: 3000
-        published: 3000
+        published: ${RAILS_PORT_DEV:-3000}
         protocol: tcp
+    volumes:
+      - .:/rutty
     depends_on:
+      - redis
       - dind
     environment:
-      RAILS_ENV: "production"
-      SECRET_KEY_BASE: "28495e9d5b413be7eba10b624c30e8df258632abe807fec07ffa3d3de740da245ab2f1623223de44e15bdb5d685e3a10c35dfb99a8f51aacf2372a4cead03224"
-      AUTHORIZED_HOSTNAME: "rutty"
+      REDIS_URL: "redis://redis:6379"
       DOCKER_HOST: "tcp://dind:2375"
+  redis:
+    image: redis:6.0.10-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
   dind:
     image: docker:20.10.2-dind
+    healthcheck:
+      test: ["CMD-SHELL", "docker run --rm hello-world || exit 1"]
+      interval: 60s
+      timeout: 5s
+      retries: 2
     environment:
       DOCKER_TLS_CERTDIR: ""
     privileged: true
