@@ -40,7 +40,7 @@ $ curl http://localhost:3000/executors/bash \
 以下で立ち上げる。
 
 ```bash
-docker-compose -f ./docker-compose.dev.yaml up -d
+docker-compose up -d
 ```
 
 初回起動時に各環境の Docker イメージの pull が走るので、気長に待つ。
