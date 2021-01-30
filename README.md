@@ -34,3 +34,48 @@ $ curl http://localhost:3000/executors/bash \
 ## 対応チャットツール
 
 - [Slack](https://github.com/k1hiiragi/rutty-slack)
+
+## 開発環境
+
+以下で立ち上げる。
+
+```bash
+docker-compose -f ./docker-compose.dev.yaml up -d
+```
+
+初回起動時に各環境の Docker イメージの pull が走るので、気長に待つ。
+
+```bash
+curl http://localhost:3000/executors | jq
+```
+
+```json
+[
+  {
+    "language": "bash",
+    "version": "5.1.0"
+  },
+  {
+    "language": "cobol",
+    "version": "3.1.2"
+  },
+  {
+    "language": "javascript",
+    "version": "15.6.0"
+  },
+  {
+    "language": "php",
+    "version": "8.0.1"
+  },
+  {
+    "language": "ruby",
+    "version": "3.0.0"
+  }
+]
+```
+
+### テスト
+
+```bash
+docker-compose exec rutty bundle exec rspec
+```
