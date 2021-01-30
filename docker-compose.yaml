@@ -1,7 +1,6 @@
 version: "3.9"
 services:
   rutty:
-    restart: always
     image: yantene/rutty
     build:
       context: .
@@ -13,8 +12,11 @@ services:
     volumes:
       - .:/rutty
     depends_on:
-      - redis
-      - dind
+      redis:
+        condition: service_healthy
+      dind:
+        condition: service_healthy
+
     environment:
       REDIS_URL: "redis://redis:6379"
       DOCKER_HOST: "tcp://dind:2375"
@@ -29,7 +31,7 @@ services:
     image: docker:20.10.2-dind
     healthcheck:
       test: ["CMD-SHELL", "docker run --rm hello-world || exit 1"]
-      interval: 60s
+      interval: 30s
       timeout: 5s
       retries: 2
     environment:
