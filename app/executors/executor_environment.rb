@@ -5,6 +5,7 @@ module ExecutorEnvironment
     ExecutorEnvironment::Javascript,
     ExecutorEnvironment::Php,
     ExecutorEnvironment::Ruby,
+    ExecutorEnvironment::Csharp,
   ]
 
   def self.find_by_language(language)
