@@ -1,6 +1,6 @@
 FROM ruby:3.0.0-alpine
 
-LABEL maintainer="contact@yantene.net"
+LABEL maintainer="yantene <contact@yantene.net>"
 
 ENV LANG "C.UTF-8"
 ENV TZ "Asia/Tokyo"
