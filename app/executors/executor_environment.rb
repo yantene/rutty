@@ -2,10 +2,10 @@ module ExecutorEnvironment
   AVAILABLE = [
     ExecutorEnvironment::Bash,
     ExecutorEnvironment::Cobol,
+    ExecutorEnvironment::Csharp,
     ExecutorEnvironment::Javascript,
     ExecutorEnvironment::Php,
     ExecutorEnvironment::Ruby,
-    ExecutorEnvironment::Csharp,
   ]
 
   def self.find_by_language(language)
