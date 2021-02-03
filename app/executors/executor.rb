@@ -4,8 +4,8 @@ class Executor
     memory: 512 * (2**10)**2, # 512MiB
     memory_swap: 512 * (2**10)**2, # 512MiB
     cpuset_cpus: "0", # Use Core 0
-    ulimit_nproc_hard: 10, # 10 processes
-    ulimit_nproc_soft: 10, # 10 processes
+    ulimit_nproc_hard: 105, # 105 processes
+    ulimit_nproc_soft: 105, # 105 processes
     ulimit_fsize_hard: 1_000_000, # 1MB
     ulimit_fsize_soft: 1_000_000 # 1MB
   )

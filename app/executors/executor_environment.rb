@@ -2,6 +2,7 @@ module ExecutorEnvironment
   AVAILABLE = [
     ExecutorEnvironment::Bash,
     ExecutorEnvironment::Cobol,
+    ExecutorEnvironment::Csharp,
     ExecutorEnvironment::Javascript,
     ExecutorEnvironment::Php,
     ExecutorEnvironment::Ruby,
