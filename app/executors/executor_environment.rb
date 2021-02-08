@@ -1,6 +1,7 @@
 module ExecutorEnvironment
   AVAILABLE = [
     ExecutorEnvironment::Bash,
+    ExecutorEnvironment::Clojure,
     ExecutorEnvironment::Cobol,
     ExecutorEnvironment::Csharp,
     ExecutorEnvironment::Javascript,
